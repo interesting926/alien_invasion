@@ -6,3 +6,8 @@ class settings():
         self.screen_hight = 600
         self.game_name = 'alien_invasion'
         self.ship_speed_factor = 1.5
+        #子弹设置
+        self.bullet_speed_factor = 1
+        self.bullet_width =3
+        self.bullet_hight = 15
+        self.bullet_color =255,00,00
