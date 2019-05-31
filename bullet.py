@@ -23,7 +23,5 @@ class Bullet(Sprite):
         self.rect.y = self.y
 
     def draw_bullet(self):
-        '''再屏幕上绘制子弹 '''
-        print(self.color)
-        print(self.rect)
-        pygame.draw.rect(self.screen,self.color,self.rect)
+        """在屏幕上绘制子弹"""
+        pygame.draw.rect(self.screen, self.color, self.rect)

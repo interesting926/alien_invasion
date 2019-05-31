@@ -6,7 +6,7 @@ class Ship():
         self.ai_settings = ai_settings
 
         #加载飞船图片并获取其外接矩形
-        self.image = pygame.image.load('image/ship.bmp')
+        self.image = pygame.image.load("alien_invasion/image/ship.bmp")
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
@@ -32,6 +32,6 @@ class Ship():
 
         self.rect.centerx = self.center
 
-    def biltme(self):
+    def blitme(self):
         #在指定位置绘制飞船
         self.screen.blit(self.image,self.rect)
