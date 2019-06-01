@@ -1,37 +1,45 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship():
-    def __init__(self,ai_settings,screen):
+class Ship(Sprite):
+
+    def __init__(self, ai_settings, screen):
+        """Initialize the ship, and set its starting position."""
+        super(Ship, self).__init__()
         self.screen = screen
         self.ai_settings = ai_settings
 
-        #加载飞船图片并获取其外接矩形
-        self.image = pygame.image.load("alien_invasion/image/ship.bmp")
+        # Load the ship image, and get its rect.
+        self.image = pygame.image.load('images/ship.bmp')
         self.rect = self.image.get_rect()
         self.screen_rect = screen.get_rect()
 
-        #移动标志
-        self.moving_righ = False
-        self.moving_left = False
-
-        #将每艘新飞船放置在屏幕底部
+        # Start each new ship at the bottom center of the screen.
         self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom  = self.screen_rect.bottom 
-
-        #在飞船center属性中存储小数值
+        self.rect.bottom = self.screen_rect.bottom
+        
+        # Store a decimal value for the ship's center.
         self.center = float(self.rect.centerx)
-
-
+        
+        # Movement flags.
+        self.moving_right = False
+        self.moving_left = False
+        
+    def center_ship(self):
+        """Center the ship on the screen."""
+        self.center = self.screen_rect.centerx
+        
     def update(self):
-        if self.moving_righ == True and self.rect.right < self.screen_rect.right:
+        """Update the ship's position, based on movement flags."""
+        # Update the ship's center value, not the rect.
+        if self.moving_right and self.rect.right < self.screen_rect.right:
             self.center += self.ai_settings.ship_speed_factor
-
-
-        if self.moving_left == True and self.rect.left > self.screen_rect.left:
+        if self.moving_left and self.rect.left > 0:
             self.center -= self.ai_settings.ship_speed_factor
-
+            
+        # Update rect object from self.center.
         self.rect.centerx = self.center
 
     def blitme(self):
-        #在指定位置绘制飞船
-        self.screen.blit(self.image,self.rect)
+        """Draw the ship at its current location."""
+        self.screen.blit(self.image, self.rect)

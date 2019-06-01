@@ -94,6 +94,7 @@ def creat_fleet(ai_settings,screen,ship,aliens):
     number_alien_width = get_number_alien_x(ai_settings,alien.rect.width)
     number_rows = get_number_rows(ai_settings, ship.rect.height,alien.rect.height)
 
+    #打印测试信息
     print("行数 %d 列数 %d",(number_alien_width,number_rows))
     for row_number in range(number_rows):
         for alien_number in range(number_alien_width):
@@ -112,7 +113,11 @@ def change_fleet_direction(ai_settings, aliens):
         alien.rect.y += ai_settings.fleet_drop_speed
     ai_settings.fleet_direction *= -1
 
-def update_aliens(ai_settings,aliens):
+def update_aliens(ai_settings,ship,aliens):
     #更新外星人群中所有外星人位置
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+
+    #检测飞船是否和外星人碰撞了
+    if pygame.sprite.spritecollideany(ship, aliens):
+        print("Ship hit!!!")
